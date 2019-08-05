@@ -5,7 +5,7 @@
 
 数据来源于[astronexus](http://astronexus.com/)
 
-完成了[100,000](http://workshop.chromeexperiments.com/stars)颗星的可视化，关于星星的一个[Chrome实验](http://chromeexperiments.com/)。 该项目是使用THREE.js和CSS3D构建的。 在本案例研究中，我将概述发现过程，分享一些编程技巧，并完成一些未来改进的想法。
+完成了[100,000](http://workshop.chromeexperiments.com/stars)颗星的可视化，关于恒星的一个[Chrome实验](http://chromeexperiments.com/)。 该项目是基于THREE.js和CSS3D构建的。 在本案例中，将概述研究过程，分享一些编程技巧，并谈一些未来改进的想法。
 
 这里讨论的主题相当广泛，需要一些THREE.js的知识，尽管我希望你仍然可以享受这作为技术验证。 您可以使用右侧的目录按钮跳转到感兴趣的区域。 首先，我将展示项目的渲染部分，然后是着色器管理，最后是如何将CSS文本标签与WebGL结合使用。
 
