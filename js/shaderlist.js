@@ -1,5 +1,6 @@
 //	list of shaders we'll load
-var shaderList = ['shaders/starsurface', 'shaders/starhalo', 'shaders/starflare', 'shaders/galacticstars', 'shaders/galacticdust', 'shaders/datastars', 'shaders/cubemapcustom', 'shaders/corona'];
+var shaderList = ['shaders/starsurface', 'shaders/starhalo', 'shaders/starflare', 'shaders/galacticstars',
+				  'shaders/galacticdust', 'shaders/datastars', 'shaders/cubemapcustom', 'shaders/corona'];
 
 //	a small util to pre-fetch all shaders and put them in a data structure (replacing the list above)
 function loadShaders( list, callback ){

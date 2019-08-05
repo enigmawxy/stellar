@@ -66,7 +66,7 @@ var gradientCanvas;
 var rtparam = { minFilter: THREE.LinearFilter, magFilter: THREE.LinearFilter, format: THREE.RGBFormat, stencilBufer: false };
 var rt;
 
-var antialias = gup('antialias') === 1 ? true : false;
+var antialias = gup('antialias') === 1;
 
 //	called from body onload
 function start( e ){
