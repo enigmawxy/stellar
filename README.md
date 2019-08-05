@@ -1,19 +1,18 @@
-https://www.html5rocks.com/en/tutorials/casestudies/100000stars/
-https://experiments.withgoogle.com/collection/chrome
-http://spaceengine.org
-http://astronexus.com/
-https://github.com/astronexus/HYG-Database
-https://www.google.com/sky/
-https://css-tricks.com/creating-your-own-gravity-and-space-simulator/
-https://mflux.tumblr.com/post/28367579774/armstradeviz
-https://www.minmax.design/arms-globe
 
-我们完成了[100,000](http://workshop.chromeexperiments.com/stars)颗星的可视化，关于星星的一个[Chrome实验](http://chromeexperiments.com/)。 该项目是使用THREE.js和CSS3D构建的。 在本案例研究中，我将概述发现过程，分享一些编程技巧，并完成一些未来改进的想法。
+#### 介绍
+
+本项目基于[Michael Chang](https://www.html5rocks.com/en/tutorials/casestudies/100000stars/)工作基础上的提炼和扩展！
+
+数据来源于[astronexus](http://astronexus.com/)
+
+完成了[100,000](http://workshop.chromeexperiments.com/stars)颗星的可视化，关于星星的一个[Chrome实验](http://chromeexperiments.com/)。 该项目是使用THREE.js和CSS3D构建的。 在本案例研究中，我将概述发现过程，分享一些编程技巧，并完成一些未来改进的想法。
 
 这里讨论的主题相当广泛，需要一些THREE.js的知识，尽管我希望你仍然可以享受这作为技术验证。 您可以使用右侧的目录按钮跳转到感兴趣的区域。 首先，我将展示项目的渲染部分，然后是着色器管理，最后是如何将CSS文本标签与WebGL结合使用。
 
 ![beaccd36b44b9825a354b89247220bc2.png](./images/ref/1.jpeg)
+
 #### Discovering Space
+
 在我们完成[Small Arms Globe](http://www.chromeexperiments.com/detail/arms-globe/)之后不久，我正在尝试使用具有景深的THREE.js粒子演示。 我注意到我可以通过调整应用的效果量来改变场景的解释“比例”。 当景深效果非常极端时，远处的物体变得非常模糊，类似于倾斜移位摄影的工作方式，给人一种观察微观场景的错觉。 相反，拒绝效果使你看起来好像在盯着深空。
 
 我开始寻找可用于注入粒子位置的数据，这条路径引导我访问[astronexus.com](http://astronexus.com/hyg)的HYG数据库，这是三个数据源（Hipparcos，Yale Bright Star Catalog和Gliese / Jahreiss Catalog）的汇编，附有pre -calculated xyz笛卡尔坐标。 让我们开始！
