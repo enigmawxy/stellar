@@ -12,7 +12,7 @@ https://www.minmax.design/arms-globe
 
 这里讨论的主题相当广泛，需要一些THREE.js的知识，尽管我希望你仍然可以享受这作为技术验证。 您可以使用右侧的目录按钮跳转到感兴趣的区域。 首先，我将展示项目的渲染部分，然后是着色器管理，最后是如何将CSS文本标签与WebGL结合使用。
 
-![beaccd36b44b9825a354b89247220bc2.png](evernotecid://CCCBA948-1B48-47D5-87B9-751F063293E1/appyinxiangcom/11996516/ENResource/p866)
+![beaccd36b44b9825a354b89247220bc2.png](./images/ref/1.jpeg)
 #### Discovering Space
 在我们完成[Small Arms Globe](http://www.chromeexperiments.com/detail/arms-globe/)之后不久，我正在尝试使用具有景深的THREE.js粒子演示。 我注意到我可以通过调整应用的效果量来改变场景的解释“比例”。 当景深效果非常极端时，远处的物体变得非常模糊，类似于倾斜移位摄影的工作方式，给人一种观察微观场景的错觉。 相反，拒绝效果使你看起来好像在盯着深空。
 
@@ -34,32 +34,32 @@ https://www.minmax.design/arms-globe
 为了产生银河系，我通过模仿银河系形成的方式，产生了100,000颗颗粒并将它们放置成螺旋状。 我并不太担心螺旋臂形成的细节，因为这将是一个代表性模型而不是数学模型。 然而，我确实尝试使螺旋臂的数量或多或少正确，并在“正确的方向”旋转。
 
 在银河系模型的后期版本中，我不再强调使用粒子来支持星系的平面图像以伴随粒子，希望它给它带来更多的摄影外观。 实际图像是旋转星系NGC 1232，离我们大约7000万光年，图像处理看起来像银河系。
-![9b81f00c531c53de7519fecb15107eb4.png](evernotecid://CCCBA948-1B48-47D5-87B9-751F063293E1/appyinxiangcom/11996516/ENResource/p869)
+![9b81f00c531c53de7519fecb15107eb4.png](./images/ref/4.jpeg)
 
 我很早就决定代表一个GL单位，基本上是3D中的一个像素，作为一个光年 - 一个统一放置所有可视化的惯例，不幸的是后来给了我严重的精确度问题。
 
 我决定的另一个约定是旋转整个场景而不是移动相机，这是我在其他几个项目中完成的。 一个优点是将所有内容放置在“转盘”上，以便鼠标左右拖动旋转相关对象，但放大只是改变camera.position.z的问题。
 
 相机的视野（或FOV）也是动态的。 当一个人向外拉时，视野变宽，吸收了越来越多的星系。 当向内朝向恒星移动时，情况正好相反，视野变窄。 这使得相机可以通过将FOV压缩成类似神的放大镜而无需处理近平面剪裁问题来查看无限小的事物（与星系相比）。
-![cfc082cb227321552492524203e6950c.png](evernotecid://CCCBA948-1B48-47D5-87B9-751F063293E1/appyinxiangcom/11996516/ENResource/p870)
+![cfc082cb227321552492524203e6950c.png](./images/ref/5.jpeg)
 
 从这里开始，我能够将太阳“放置”在离银河核心远的地方。 我还能够通过绘制出[Kuiper Cliff](http://en.wikipedia.org/wiki/Kuiper_cliff#.22Kuiper_cliff.22)的半径（我最终选择可视化[Oort Cloud](http://en.wikipedia.org/wiki/Oort_cloud)）来可视化太阳系的相对大小。 在这个模型太阳系中，我还可以想象一个简化的地球轨道，以及太阳的实际半径。
-![fda9c89206210547a5c3e2778e8f03c1.png](evernotecid://CCCBA948-1B48-47D5-87B9-751F063293E1/appyinxiangcom/11996516/ENResource/p871)
+![fda9c89206210547a5c3e2778e8f03c1.png](./images/ref/6.jpeg)
 太阳很难渲染。 我不得不欺骗尽可能多的实时图形技术。 太阳表面是等离子体的热泡沫，需要随着时间的推移而发生脉冲和变化。 这是通过太阳表面的红外图像的位图纹理来模拟的。 表面着色器根据此纹理的灰度进行颜色查找，并在单独的颜色渐变中执行查找。 当这种查找随着时间的推移而移动时，会产生这种类似熔岩的失真。
 
 类似的技术被用于太阳的日冕，除了它是一个扁平的精灵卡片，总是面向相机使用THREE.Gyroscope().
-![e84347944bffb977d4eb079a7294f500.png](evernotecid://CCCBA948-1B48-47D5-87B9-751F063293E1/appyinxiangcom/11996516/ENResource/p872)
+![e84347944bffb977d4eb079a7294f500.png](./images/ref/7.jpeg)
 
 太阳耀斑是通过应用于环面的顶点和碎片着色器创建的，围绕太阳表面的边缘旋转。 顶点着色器具有噪声功能，使其以类似blob的方式编织。
 
 正是在这里，由于GL的精确性，我开始经历一些z-fighting问题。 精度的所有变量都是在THREE.js中预先定义的，所以如果没有大量的工作，我就无法逼真地提高精度。 精确度问题在原点附近并没有那么糟糕。 然而，一旦我开始建模其他星系，这就成了一个问题。
-![a413ac3e50263c65c1aca2e50ffd0024.png](evernotecid://CCCBA948-1B48-47D5-87B9-751F063293E1/appyinxiangcom/11996516/ENResource/p873)
+![a413ac3e50263c65c1aca2e50ffd0024.png](./images/ref/8.jpeg)
 
 我用了一些黑客来缓解z-fighting问题。 THREE的Material.polygonoffset是一个允许多边形在不同的感知位置渲染的属性（据我所知）。 这用于迫使电晕平面始终渲染在太阳表面的顶部。 在此之下，渲染太阳“光环”以使尖锐的光线远离球体。
 
 与精度相关的另一个问题是，当场景放大时，星模型会开始抖动。为了解决这个问题，我必须“清零”场景旋转并分别旋转星形模型和环境贴图，以给出您正在轨道运行的错觉星。
 #### Creating Lensflare
-![3c7cf7c902b106561182c4961b63f54d.png](evernotecid://CCCBA948-1B48-47D5-87B9-751F063293E1/appyinxiangcom/11996516/ENResource/p874)
+![3c7cf7c902b106561182c4961b63f54d.png](./images/ref/9.jpeg)
 空间可视化是我觉得我可以通过过度使用lensflare逃脱的地方。 [THREE.LensFlare](https://github.com/mrdoob/three.js/blob/master/src/extras/objects/LensFlare.js)用于此目的，我需要做的就是抛出一些变形六边形和一些[JJ艾布拉姆斯](http://en.wikipedia.org/wiki/J._J._Abrams)。 下面的代码段显示了如何在场景中构建它们。
 ```javascript
 //	This function retuns a lesnflare THREE object to be .add()ed to the scene graph
@@ -105,7 +105,7 @@ function lensFlareUpdateCallback( object ) {
 ```
 
 一种简单的方法来进行纹理滚动
-![a387061908f444487691788c09346c91.png](evernotecid://CCCBA948-1B48-47D5-87B9-751F063293E1/appyinxiangcom/11996516/ENResource/p875)
+![a387061908f444487691788c09346c91.png](./images/ref/10.jpeg)
 对于地理上的平面，在太阳中心使用创建一个巨大的THREE.CylinderGeometry()对象。为了创造向外扇动的“光波”，我随着时间的推移修改了它的纹理偏移
 ```javascript
 mesh.material.map.needsUpdate = true;
@@ -136,7 +136,7 @@ var datastarAttributes = {
 };
 ```
 填充colorIndex数组会为每个粒子在着色器中赋予其独特的颜色。 通常情况下，一个人会传入一个颜色vec3，但在这种情况下，我正在传递一个浮动，以便最终进行颜色渐变查找。
-![69ed8da89dc9b9b5f5ee67c09d0a0e9b.png](evernotecid://CCCBA948-1B48-47D5-87B9-751F063293E1/appyinxiangcom/11996516/ENResource/p876)
+![69ed8da89dc9b9b5f5ee67c09d0a0e9b.png](./images/ref/11.jpeg)
 颜色渐变看起来像这样,但是我需要从JavaScript访问它的位图颜色数据。 我这样做的方法是首先将图像加载到DOM上，将其绘制到canvas元素中，然后访问画布位图.
 ```javascript
 //	make a blank canvas, sized to the image, in this case gradientImage is a dom image element
@@ -153,7 +153,7 @@ gradientCanvas.getColor = function( percentage ){
 }
 ```
 然后使用相同的方法在星模型视图中着色单个恒星
-![68063173abca73aeacd890114c82d9f5.png](evernotecid://CCCBA948-1B48-47D5-87B9-751F063293E1/appyinxiangcom/11996516/ENResource/p877)
+![68063173abca73aeacd890114c82d9f5.png](./images/ref/12.jpeg)
 
 #### Shader wrangling
 在整个项目中，我发现我需要编写越来越多的着色器来完成所有的视觉效果。 我为此目的编写了一个自定义着色器加载器，因为我厌倦了在index.html中使用着色器
@@ -213,7 +213,7 @@ var galacticShaderMaterial = new THREE.ShaderMaterial( {
 关于这个项目的早期迭代使用了相同的技术，但是我一直渴望尝试[Luis Cruz](http://www.emagix.net/academic/mscs-project/item/camera-sync-with-css3-and-webgl-threejs)描述的其他方法。
 
 基本思路：将CSS3D的矩阵变换与THREE的相机和场景相匹配，你可以将CSS元素“放置”在3D中，就像它在三个场景之上一样。 但是有一些限制，例如，您将无法将文本放在THREE.js对象下面。 这仍然比尝试使用“顶部”和“左”CSS属性执行布局快得多。
-![8daebe233c2d511a9448025b87d5f6b1.png](evernotecid://CCCBA948-1B48-47D5-87B9-751F063293E1/appyinxiangcom/11996516/ENResource/p878)
+![8daebe233c2d511a9448025b87d5f6b1.png](./images/ref/13.jpeg)
 
 您可以在此处找到演示（以及视图源代码）。 但是我确实发现矩阵顺序已经改变为THREE.js。 我更新的功能
 ```javascript
@@ -244,7 +244,7 @@ function toCSSMatrix(threeMat4, b) {
 由于所有内容都已转换，因此文本不再面向相机。 解决方案是使用[THREE.Gyroscope（）](https://github.com/mrdoob/three.js/blob/master/src/extras/core/Gyroscope.js)强制Object3D从场景中“丢失”其继承的方向。 这种技术被称为“广告牌”，陀螺仪非常适合这样做。
 
 真正令人高兴的是，所有普通的DOM和CSS仍在使用，例如能够将鼠标悬停在3D文本标签上并让它发出阴影.
-![8262a059b895c23e8b110da05c06cedc.png](evernotecid://CCCBA948-1B48-47D5-87B9-751F063293E1/appyinxiangcom/11996516/ENResource/p879)
+![8262a059b895c23e8b110da05c06cedc.png](./images/ref/14.jpeg)
 放大时我发现排版的缩放导致了定位问题。 也许这是由于文本的字距和填充？ 另一个问题是文本在放大时变得像素化，因为DOM渲染器将渲染的文本视为纹理四边形，这是使用此方法时需要注意的事项。 回想起来，我本来可以使用巨大的字体大小的文本，也许这是未来探索的东西。 在这个项目中，我还使用了前面描述的“顶部/左侧”CSS放置文本标签，用于太阳系中行星附近的真正小元素
 
 #### Music playback and looping
