@@ -259,7 +259,9 @@ function toCSSMatrix(threeMat4, b) {
 由于所有内容都已转换，因此文本不再面向相机。 解决方案是使用[THREE.Gyroscope（）](https://github.com/mrdoob/three.js/blob/master/src/extras/core/Gyroscope.js)强制Object3D从场景中“丢失”其继承的方向。 这种技术被称为“广告牌”，陀螺仪非常适合这样做。
 
 真正令人高兴的是，所有普通的DOM和CSS仍在使用，例如能够将鼠标悬停在3D文本标签上并让它发出阴影.
+
 ![8262a059b895c23e8b110da05c06cedc.png](./images/ref/14.jpeg)
+
 放大时我发现排版的缩放导致了定位问题。 也许这是由于文本的字距和填充？ 另一个问题是文本在放大时变得像素化，因为DOM渲染器将渲染的文本视为纹理四边形，这是使用此方法时需要注意的事项。 回想起来，我本来可以使用巨大的字体大小的文本，也许这是未来探索的东西。 在这个项目中，我还使用了前面描述的“顶部/左侧”CSS放置文本标签，用于太阳系中行星附近的真正小元素
 
 #### Music playback and looping
