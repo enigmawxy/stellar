@@ -11,12 +11,13 @@ https://www.minmax.design/arms-globe
 我们完成了[100,000](http://workshop.chromeexperiments.com/stars)颗星的可视化，关于星星的一个[Chrome实验](http://chromeexperiments.com/)。 该项目是使用THREE.js和CSS3D构建的。 在本案例研究中，我将概述发现过程，分享一些编程技巧，并完成一些未来改进的想法。
 
 这里讨论的主题相当广泛，需要一些THREE.js的知识，尽管我希望你仍然可以享受这作为技术验证。 您可以使用右侧的目录按钮跳转到感兴趣的区域。 首先，我将展示项目的渲染部分，然后是着色器管理，最后是如何将CSS文本标签与WebGL结合使用。
+
 ![beaccd36b44b9825a354b89247220bc2.png](evernotecid://CCCBA948-1B48-47D5-87B9-751F063293E1/appyinxiangcom/11996516/ENResource/p866)
 #### Discovering Space
 在我们完成[Small Arms Globe](http://www.chromeexperiments.com/detail/arms-globe/)之后不久，我正在尝试使用具有景深的THREE.js粒子演示。 我注意到我可以通过调整应用的效果量来改变场景的解释“比例”。 当景深效果非常极端时，远处的物体变得非常模糊，类似于倾斜移位摄影的工作方式，给人一种观察微观场景的错觉。 相反，拒绝效果使你看起来好像在盯着深空。
 
 我开始寻找可用于注入粒子位置的数据，这条路径引导我访问[astronexus.com](http://astronexus.com/hyg)的HYG数据库，这是三个数据源（Hipparcos，Yale Bright Star Catalog和Gliese / Jahreiss Catalog）的汇编，附有pre -calculated xyz笛卡尔坐标。 让我们开始！
-![9591889341ea5499cb82997aab875492.png](evernotecid://CCCBA948-1B48-47D5-87B9-751F063293E1/appyinxiangcom/11996516/ENResource/p867)
+![9591889341ea5499cb82997aab875492.png](./images/ref/2.jpeg)
 
 花了大约一个小时的时间将星形数据放在3D空间中。数据集中有119,617颗恒星，所以用粒子代表每颗恒星对于现代GPU来说不是问题。 还有87个单独识别的星星，因此我使用我在Small Arms Globe中描述的相同技术创建了CSS标记叠加。
 
@@ -28,7 +29,7 @@ https://www.minmax.design/arms-globe
 
 #### Building a Galaxy
 我的计划是在程序上生成一个星系模型，可以将星系数据放在上下文中 - 并希望能够对我们在银河系中的位置给出一个很棒的视图。
-![c2c7746f5b371ba9dfa662ca279b386e.png](evernotecid://CCCBA948-1B48-47D5-87B9-751F063293E1/appyinxiangcom/11996516/ENResource/p868)
+![c2c7746f5b371ba9dfa662ca279b386e.png](./images/ref/3.jpeg)
 
 为了产生银河系，我通过模仿银河系形成的方式，产生了100,000颗颗粒并将它们放置成螺旋状。 我并不太担心螺旋臂形成的细节，因为这将是一个代表性模型而不是数学模型。 然而，我确实尝试使螺旋臂的数量或多或少正确，并在“正确的方向”旋转。
 
