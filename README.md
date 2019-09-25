@@ -1,3 +1,13 @@
+#### 了解自动播放的流程
+
+#### 更新日志
+
+该项目使用HTML+JavaScript开发完成，没有使用模块化组件实现。
+
+程序入口 main.js 的 start 函数.
+
+underscore.js: http://underscorejs.org, jquery主要是用于处理js和html页面交互的，封装了很多操作dom的方法，以及ajax，相比于原生的js更加的简洁，提高了开发效率。而underscore则可以理解为一个js的函数库，其中主要封装了一些常用的js方法，比如数组操作的map，reduce，filter等等，不过这些函数大多在es6中已经实现了。类似underscore的还是lodash，都是辅助js开发的.
+
 
 #### 介绍
 
