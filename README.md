@@ -8,6 +8,55 @@
 
 underscore.js: http://underscorejs.org, jquery主要是用于处理js和html页面交互的，封装了很多操作dom的方法，以及ajax，相比于原生的js更加的简洁，提高了开发效率。而underscore则可以理解为一个js的函数库，其中主要封装了一些常用的js方法，比如数组操作的map，reduce，filter等等，不过这些函数大多在es6中已经实现了。类似underscore的还是lodash，都是辅助js开发的.
 
+jquery.mousewheel.js: 是一个用于添加跨浏览器的鼠标滚轮支持的 jQuery 插件
+
+jquery.preventMacBackScroll.js: Prevent horizontal scroll for Back page in Mac 10.7+
+
+urlArgs.js: 返回 window.urlArgs，似乎没有被其它地方调用。
+
+infocallout.js：
+
+starsystems.js：星系数据定义文件
+
+starmodel.js：星模型
+
+css3worldspace.js:
+
+helphud.js: help元素的隐藏控制
+
+spacehelpers.js: 
+
+shaderlist.js: 着色器加载功能
+
+skybox.js: 天空盒子管理器，包括初始化和更新
+
+plane.js: 生成太空平面网格对象
+
+guides.js: 生成太空半径、距离度量网格对象
+
+dust.js: 生成灰尘粒子系统
+
+lensflare.js: 星 flare 管理
+
+hipparcos.js: 生成星系
+
+galaxy.js: 生成星空
+
+solarsystem.js: 生成太阳系
+
+sun.js: 生成太阳
+
+legacymarkers.js: These markers use screenspace by doing fancy 3D to 2D calculations
+
+marker.js: 标记管理
+
+tour.js: 旅程管理
+
+main.js: 程序入口
+
+jquery.tooltip.js： 一款jQuery消息提示插件tooltip.js，鼠标悬停在设置好的文字上时，会有一个消息提示框弹出，并显示预设的文字内容，鼠标离开时消息提示框则自动消息，消息提示的样式有黑色和白色两种，当然，可以自由扩展的。
+
+minimap.js: 
 
 #### 介绍
 
