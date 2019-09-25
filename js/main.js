@@ -366,7 +366,7 @@ function initScene() {
 	document.getElementById('bgmusicA').play();
 
 	if( localStorage && localStorage.getItem('sound') === 0 ){
-		// console.log('localstorage sound is off');
+		// consoe.log('localstorage sound is off');
       	// $('#soundoff').show();
       	// $('#sound').hide();		
 		muteSound();

@@ -21,11 +21,6 @@
   var $minimap = $domElement.find('#zoom-levels');
   var $volume = $domElement.find('#volume').load(updateCount);
   var $about = $domElement.find('#about').load(updateCount);
-  // var $tour = $domElement.find('#tour').load(updateCount);
-  // var $heatvision = $domElement.find('#heatvision').load(updateCount);
-  // var $sound = $domElement.find('#sound').load(updateCount);
-  // var $soundoff = $domElement.find('#soundoff').load(updateCount);
-  // var $backdrop = $domElement.find("#zoom-backdrop");
   var $cursor = $domElement.find('#zoom-cursor');
 
   // Calculation variables
@@ -102,16 +97,14 @@
   // Exports
 
   // Create an initializer
+  root.initializeMinimap = function() {
 
-  var initializeMinimap = root.initializeMinimap = function() {
-
-    this.updateMinimap();
+    root.updateMinimap();
 
   };
 
   // A means to update the minimap
-
-  var updateMinimap = root.updateMinimap = function() {
+  root.updateMinimap = function() {
 
     if (!root.camera) {
       return;
@@ -123,39 +116,23 @@
 
   };
 
-  var setScrollPosition = root.setScrollPositionFromTouch = function( touch ){
+  root.setScrollPositionFromTouch = function( touch ){
     var y = (touch.pageY - $minimap.offset().top);
     position = cmap(y, 0, $minimap.height(), 0, 100);
     updateCursorPosition();
   };
 
-  var setMinimap = root.setMinimap = function(b) {
+  root.setMinimap = function(b) {
     dragged = !!b;
   };
 
-  var showSunButton = root.showSunButton = function() {
-    // $home.css({
-    //   height: 25 + 'px'
-    // });
-    // setTimeout(function() {
-    //   $window.trigger('resize');
-    // }, 250);
-    
+  root.showSunButton = function() {
     if ($home) {
-      // console.log("show home button");
-      // $home.fadeIn();
       $home.css({opacity:1.0,display:'inline'});
     }
   };
 
   var hideSunButton = root.hideSunButton = function() {
-    // $home.fadeOut();
-    // $home.css({
-    //   height: 0
-    // });
-    // setTimeout(function() {
-    //   $window.trigger('resize');
-    // }, 250);
     if ($home) {
       $home.fadeOut();
     }
@@ -170,17 +147,6 @@
 
   $minimap
     .bind('touchstart', onElementTouchStart);
-
-  // $home
-  //   .css({
-  //     height: 0,
-  //     overflow: 'hidden'
-  //   })
-  //   // .tip('Center camera on the sun.')
-  //   .click(function(e) {
-  //     // markers[0].$.trigger('click');
-  //     unfocus(true);
-  //   });
 
   $about
     .click(function(e) {
@@ -249,6 +215,7 @@
         e.preventDefault();
         tour.start();
       });
+
     $iconNav.append($tour);
 
     $.get('./images/icons/heat-vision.svg', function(resp) {
@@ -308,8 +275,6 @@
 
     updateCursorPosition();    
     root.scrollbaring = true;
-    // $window
-    //   .bind('touchmove', dragTouch);    
   }
 
   function drag(e) {
@@ -322,17 +287,10 @@
 
   function dragTouch(e){    
     var event = e.originalEvent;
-    if( event.touches.length !== 1 )
-      return;    
-
-    // event.preventDefault();    
-    // event.stopImmediatePropagation();
-    // Make sure the document doesn't scroll
-    // document.body.scrollTop = document.body.scrollLeft = 0;
+    return event.touches.length !== 1;
   }
 
   function onWindowMouseUp(e) {
-    // console.log('minimap end');
     $window
       .unbind('mousemove', drag);
     $window
@@ -375,8 +333,6 @@
       centerOnSun();
       setTimeout(hideSunButton, 500);
       zoomOut(555);
-    } else {
-      // zoomOut();
     }
   }
 
