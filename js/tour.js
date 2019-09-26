@@ -1,14 +1,14 @@
 var GALAXY_TOUR = [
   {"rx":-0.18605511827781787,"ry":-2.464222597755626,"z":1.1,"travelTime":5000,"restTime":4000,"message":"This is the Sun, our home star."},
   {"rx":1.4395420537811414,"ry":6.281532559509658,"z":5.148607771018531,"travelTime":4000,"restTime":3000,"message":"It would take 18 years for a jet airplane to fly to the sun.","callback":displaySunEarthDiagram},
-  {"rx":0.8369933670834534,"ry":1.837770087331788,"z":30.937978822676058,"travelTime":4000,"restTime":5000,"message":"The furthest man-made object, Voyager 1, is now almost 17 light hours away."}, 
-  {"rx":0.6424544063335803,"ry":-0.0031800804774647718,"z":198.23179619362583,"travelTime":3000,"restTime":5000,"message":"This is the length of one light year, the distance that light can travel in a year."},  
+  {"rx":0.8369933670834534,"ry":1.837770087331788,"z":30.937978822676058,"travelTime":4000,"restTime":5000,"message":"The furthest man-made object, Voyager 1, is now almost 17 light hours away."},
+  {"rx":0.6424544063335803,"ry":-0.0031800804774647718,"z":198.23179619362583,"travelTime":3000,"restTime":5000,"message":"This is the length of one light year, the distance that light can travel in a year."},
   {"rx":0.503337952515914,"ry":-0.9904961225532652,"z":432.34847195438465,"travelTime":4000,"restTime":8000,"message":"These are the stars closest to our solar system.<br>The nearest star system, Alpha Centauri, is 4.3 light years away."},
   {"rx":0.0019755752638865747,"ry":0.23341774437325485,"z":1210.7034532510997,"travelTime":4000,"restTime":5000,"message":"Named stars that astronomers have studied are highlighted here."},
   {"rx":0.5522785678088462,"ry":1.324151395815386,"z":1672.4214873346518,"travelTime":5000,"restTime":5000,"message":"You're seeing the actual density and location of over 100,000 stars in this view."},
   {"rx":-0.4155179986306899,"ry":2.5204046098483026,"z":31782.290495394205,"travelTime":5000,"restTime":5000,"message":"Blue, hotter burning stars reside closer to the galactic plane.", "callback":highlightStarHeat},
   {"rx":-0.12216429754294249,"ry":1.9989722678912,"z":79999.99999999994,"travelTime":5000,"restTime":5000,"message":"All of which are in the Milky Way... which has 200 to 400 billion stars in total.", "callback":highlightMilkyWay},
-  {"rx":0,"ry":0,"z":1.1,"travelTime":10000,"restTime":6000,"message":"Go forth and explore. Click, drag and zoom with your mouse."},  
+  {"rx":0,"ry":0,"z":1.1,"travelTime":10000,"restTime":6000,"message":"Go forth and explore. Click, drag and zoom with your mouse."},
 ];
 
 var cinematic_width = 75;
@@ -38,8 +38,6 @@ var Tour = function(stops) {
   this.top = this.domElement.find('.top-bar');
   this.bottom = this.domElement.find('.bottom-bar');
   this.content = this.domElement.find('.message');
-  // this.content.html('<p>' + this.states[0].message + '</p>');
-
 };
 
 // Statics
@@ -76,25 +74,30 @@ Tour.prototype = {
   start: function() {
     var _this = this, next;
     if( _this.current === 0 ){
+      // 设置 href 元素以及内容
       next = $('<a href="#" />')
       .html('Stop')
       .click(function(e) {
         e.preventDefault();
         _this.stop();
-        // _this.next(true);
       });
     }
-    
+
     _this.current = 0;
     _this.touring = false;
     _this.timingBuffer = 0;
 
-    //  clear out everything if tour restarts
+    //  clear out message if tour restarts
     _this.content.html('');
+
+    // 淡出效果
     Tour.meta.fadeOut();
     _this.domElement.fadeOut();
 
+    // 把 next 元素增加到 p 标签，同时 p标签也加到 meta 之下
     var p = Tour.meta.find('p').html(next);
+
+    // 修改 meta 左边距
     Tour.meta.css({
       marginLeft: - Tour.meta.width() / 2 + 'px'
     });
@@ -111,7 +114,7 @@ Tour.prototype = {
     $detailContainer.fadeOut();
     centerOn( new THREE.Vector3(0,0,0) );
     if( markers.length > 0 )
-      markers[0].select();  
+      markers[0].select();
     camera.position.target.x = 0;
 
     toggleHeatVision( false );
@@ -143,10 +146,6 @@ Tour.prototype = {
 
       Tour.meta.fadeIn();
 
-      // Tour.meta.animate({
-      //   marginBottom: cinematic_width + 'px'
-      // }, Tour.Duration, 'swing');
-
       _this.bottom.animate({
         marginBottom: 0
       }, Tour.Duration, 'swing');
@@ -156,6 +155,7 @@ Tour.prototype = {
       }, Tour.Duration, 'swing', function() {
 
         if (callback) {
+          console.log('show definition call callback');
           callback.call(_this);
         }
 
@@ -197,10 +197,10 @@ Tour.prototype = {
 
   },
 
-  showMessage: function( message, duration, callback ){    
+  showMessage: function( message, duration, callback ){
 
     var _this = this;
-    _this.show();    
+    _this.show();
 
     var onStart = function(){
       // console.log("starting message");
@@ -214,10 +214,10 @@ Tour.prototype = {
         _this.hide();
         Tour.meta.fadeOut();
         _this.timingBuffer = 0.0;
-        _this.clearTimers();        
+        _this.clearTimers();
         firstTime = false;
         $(window).trigger('resize');
-      });      
+      });
       var p = Tour.meta.find('p').html(next);
       Tour.meta.css({
         marginLeft: - Tour.meta.width() / 2 + 'px'
@@ -231,8 +231,8 @@ Tour.prototype = {
         if( callback )
           callback();
         //_this.hide();
-      });      
-    }
+      });
+    };
 
     _this.timingBuffer += duration + 1000.0;
     _this.timers.push( window.setTimeout( onFinished, _this.timingBuffer ) );
@@ -242,7 +242,7 @@ Tour.prototype = {
     return this;
   },
 
-  clearTimers: function(){    
+  clearTimers: function(){
     for( var i in this.timers ){
       var timer = this.timers[i];
       window.clearTimeout( timer );
@@ -261,7 +261,7 @@ Tour.prototype = {
   next: function(continuous) {
 
     var _this = this;
-    var state = this.state = this.states[this.current];
+    var state = this.states[this.current];
 
     _.each(Tour.timeouts, clearTimeout);
 
@@ -288,7 +288,7 @@ Tour.prototype = {
       this.content.html('<p><span>' + state.message + '</span></p>');
     }
 
-    this.rotating_tween = new TWEEN.Tween(rotating.rotation)
+    new TWEEN.Tween(rotating.rotation)
       .to({
         x: state.rx,
         y: state.ry
@@ -296,7 +296,7 @@ Tour.prototype = {
       .easing(Tour.Easing)
       .start();
 
-    this.camera_tween = new TWEEN.Tween(camera.position)
+    new TWEEN.Tween(camera.position)
       .to({
         z: state.z
       }, state.travelTime)
@@ -308,6 +308,7 @@ Tour.prototype = {
         _this.content.fadeIn(function() {
           Tour.timeouts.push(setTimeout(function() {
             if (continuous) {
+              console.log('next defintion call next');
               _this.next(true);
             }
           }, state.restTime));
