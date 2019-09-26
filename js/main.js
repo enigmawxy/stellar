@@ -86,7 +86,7 @@ function start( e ){
 
 	gradientImage = document.createElement('img');
 	gradientImage.onload = postStarGradientLoaded;
-	gradientImage.src = 'images/star_color_modified.png';	
+	gradientImage.src = 'images/star_color_modified.png';
 }
 
 var postStarGradientLoaded = function(){
@@ -104,7 +104,7 @@ var postStarGradientLoaded = function(){
 		//	we have the shaders loaded now...
 		shaderList = e;
 		postShadersLoaded();
-	});	
+	});
 };
 
 var postShadersLoaded = function(){
@@ -135,7 +135,7 @@ var gui;
 
 function buildGUI(){
 	gui = new dat.GUI();
-	gui.domElement.style.display = 'none';
+	// gui.domElement.style.display = 'none';
 	// gui.domElement.style.display = 'none';
 
 	c = gui.add(controllers, 'viewSize', 0.01, 4.0 );
@@ -149,7 +149,7 @@ function buildGUI(){
 	c = gui.add(controllers, 'sol' );
 	c = gui.add(controllers, 'solarsystem' );
 	c = gui.add(controllers, 'hipparcos' );
-	c = gui.add(controllers, 'milkyway' );	
+	c = gui.add(controllers, 'milkyway' );
 
 	// c = gui.add(camera, 'fov', 1.0, 200.0 );
 	initializeMinimap();
@@ -179,7 +179,7 @@ function initScene() {
 	scene.add(rotating);
 
 	translating.targetPosition = new THREE.Vector3();
-	translating.update = function(){
+	translating.update = function() {
 		if( this.easePanning )
 			return;
 
@@ -209,8 +209,6 @@ function initScene() {
 	renderer.sortObjects = false;
 	renderer.generateMipmaps = false;
 
-
-
 	maxAniso = renderer.getMaxAnisotropy();
 
 	document.getElementById('glContainer').appendChild( renderer.domElement );
@@ -224,11 +222,10 @@ function initScene() {
 	masterContainer.addEventListener( 'click', onClick, true );
 	masterContainer.addEventListener( 'mousewheel', onMouseWheel, false );
 	masterContainer.addEventListener( 'keydown', onKeyDown, false);
-	
+
 	masterContainer.addEventListener( 'touchstart', touchStart, false );
 	window.addEventListener( 'touchend', touchEnd, false );
 	window.addEventListener( 'touchmove', touchMove, false );
-
 
 	//	-----------------------------------------------------------------------------
 	//	Setup our camera
@@ -251,22 +248,6 @@ function initScene() {
 		if( this.easeZooming )
 			return;
 
-		//	cam shake
-		//	except it's horrible when zoomed in
-		//	let's not use it
-
-		// camera.rotation.vx += (0 - camera.rotation.x) * 0.005 * camera.position.z / 100;
-		// camera.rotation.vy += (0 - camera.rotation.y) * 0.005 * camera.position.z / 100;
-
-		// camera.rotation.x += camera.rotation.vx;// + Math.cos( (Date.now() + Math.random()) * 0.004 ) * 0.000015 * camera.position.z / 1000000;
-		// camera.rotation.y += camera.rotation.vy;// + Math.sin( (Date.now() + Math.random()) * 0.004 ) * 0.000015 * camera.position.z / 1000000;
-
-		// camera.rotation.vx *= 0.98 * camera.position.z / 1000;
-		// camera.rotation.vy *= 0.98 * camera.position.z / 1000;
-
-		// camera.rotation.x *= constrain(camera.position.z / 100, 0, 1);		
-		// camera.rotation.y *= constrain(camera.position.z / 100, 0, 1);		
-
 		camera.position.z += (camera.position.target.z - camera.position.z) * 0.125;
 
 	};
@@ -275,7 +256,6 @@ function initScene() {
 	camera.scale.z = 0.83;
 
 	scene.add( camera );
-
 
 	var windowResize = THREEx.WindowResize(renderer, camera);
 	if( enableSkybox )
@@ -292,7 +272,6 @@ function initScene() {
 	initCSS3D();
 
 	// Close Button
-
 	var $exout = $('#ex-out').click(function(e) {
 		e.preventDefault();
 		$detailContainer.fadeOut();
@@ -353,10 +332,10 @@ function initScene() {
 		};
 		setTimeout( playB, 15000 );
 	}, false);
-		
+
 	document.getElementById('bgmusicB').addEventListener('ended', function(){
 		this.currentTime = 0;
-		this.pause();	
+		this.pause();
 		var playA = function(){
 			document.getElementById('bgmusicA').play();
 		};
@@ -366,9 +345,7 @@ function initScene() {
 	document.getElementById('bgmusicA').play();
 
 	if( localStorage && localStorage.getItem('sound') === 0 ){
-		// consoe.log('localstorage sound is off');
-      	// $('#soundoff').show();
-      	// $('#sound').hide();		
+
 		muteSound();
 	}
 
@@ -377,14 +354,14 @@ function initScene() {
 function sceneSetup(){
 
 	if( enableStarModel ){
-    // console.time("make star models");
-		starModel = makeStarModels();		
+
+		starModel = makeStarModels();
 		starModel.setSpectralIndex(0.9);
-		starModel.setScale(1.0);		
+		starModel.setScale(1.0);
 		translating.add(starModel);
-		// console.timeEnd("make star models");
+
 	}
-	
+
 
 	if( enableDataStar ){
 		pSystem = generateHipparcosStars();
@@ -397,22 +374,22 @@ function sceneSetup(){
 		if( enableDust ){
 			pDustSystem = generateDust();
 			pGalacticSystem.add( pDustSystem );
-		}		
+		}
 	}
 
 	if( enableSolarSystem ){
 		var solarSystem = makeSolarSystem();
 		translating.add(solarSystem);
 	}
-	
+
 	if( enableSpacePlane ){
-		spacePlane = createSpacePlane();	
-		translating.add( spacePlane );		
+		spacePlane = createSpacePlane();
+		translating.add( spacePlane );
 	}
 
 	if( enableSkybox ){
 		initSkybox(false);
-	}	
+	}
 
 }
 
@@ -449,14 +426,14 @@ function animate() {
 		//	since we are at 0,0,0 floating point percision won't be as big of a problem
 		var spinCutoff = 100;
 		if( translating.position.length() < 0.0001 ){
-			spinCutoff = 2;			
+			spinCutoff = 2;
 		}
-		
-		if( camera.position.z < spinCutoff ){	
+
+		if( camera.position.z < spinCutoff ){
 			if( starModel ){
 				starModel.rotation.x = rotateX;
-				starModel.rotation.y = rotateY;	
-			}					
+				starModel.rotation.y = rotateY;
+			}
 			rotating.rotation.x = 0;
 			rotating.rotation.y = 0;
 		}
@@ -467,10 +444,10 @@ function animate() {
 				starModel.rotation.x = rotateX;
 				starModel.rotation.y = rotateY;
 			}
-			
+
 		}
-		
-		
+
+
 
 		var isZoomedIn = camera.position.target.z < markerThreshold.min;
 		var isZoomedToSolarSystem = camera.position.target.z > markerThreshold.min;
@@ -506,7 +483,7 @@ function animate() {
 	camera.updateProjectionMatrix();
 
 	shaderTiming = (Date.now() - startTime )/ 1000;
-	
+
 	rotateYAccumulate += Math.abs(rotateY-lastRotateY) * 5;
 
 	rotating.traverse(function( mesh ){
@@ -529,7 +506,7 @@ function animate() {
 
   	requestAnimationFrame( animate );
 
-	if ( tour.touring || camera.easeZooming || translating.easePanning ) {		
+	if ( tour.touring || camera.easeZooming || translating.easePanning ) {
 
 		updateMinimap();
 
@@ -553,15 +530,15 @@ function render() {
 function muteSound(){
 	document.getElementById('bgmusicA').volume = 0;
 	document.getElementById('bgmusicB').volume = 0;
-	if ( localStorage ) 
+	if ( localStorage )
 		localStorage.setItem('sound', 0);
 }
 
 function unmuteSound(){
 	document.getElementById('bgmusicA').volume = 1;
 	document.getElementById('bgmusicB').volume = 1;
-	if ( localStorage ) 
-		localStorage.setItem('sound', 1);		
+	if ( localStorage )
+		localStorage.setItem('sound', 1);
 }
 
 function displayIntroMessage(){
@@ -573,5 +550,5 @@ function displayIntroMessage(){
 		$(window).trigger('resize');
 		$iconNav.find('#tour-button').trigger('mouseover');
 	} )
-	.endMessages();	
+	.endMessages();
 }
