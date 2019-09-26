@@ -50,7 +50,7 @@ legacymarkers.js: These markers use screenspace by doing fancy 3D to 2D calculat
 
 marker.js: 标记管理
 
-tour.js: 旅程管理
+tour.js: 旅程管理, 通过增加theater元素，修改meta元素，实现场景内容的自动播放。核心通过回调函数实现。在next函数里实现递归调用。
 
 main.js: 程序入口
 
