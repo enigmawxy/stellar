@@ -56,7 +56,7 @@ main.js: 程序入口
 
 jquery.tooltip.js： 一款jQuery消息提示插件tooltip.js，鼠标悬停在设置好的文字上时，会有一个消息提示框弹出，并显示预设的文字内容，鼠标离开时消息提示框则自动消息，消息提示的样式有黑色和白色两种，当然，可以自由扩展的。
 
-minimap.js: 
+minimap.js: 创建和控制页面头部的Tour、Toggle、Audio按钮。启动时自动执行 minimap.js
 
 #### 介绍
 
